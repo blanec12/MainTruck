@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, redirect, flash, url_for
 from db.config import mysql
 
 login_blueprint = Blueprint("login", __name__)
@@ -17,6 +17,7 @@ def login_post():
     user_found = cursor.fetchone()
 
     if user_found: 
-        render_template("home.html")
+        render_template(url_for("home.html"))
     else:
-        return "<h1>ERROR: User/Password combo not found....</h1>"
+        flash("Invalid credentials. Please try again.")
+        return redirect(url_for("login.html"))
