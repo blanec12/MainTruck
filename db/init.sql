@@ -1,24 +1,25 @@
 CREATE DATABASE MainTruckDB;
 USE MainTruckDB;
 
-CREATE TABLE Users (
-  ID VARCHAR(255) NOT NULL DEFAULT (UUID()),
-  FirstName VARCHAR(50) DEFAULT NULL,
-  LastName VARCHAR(50) DEFAULT NULL,
-  Phone VARCHAR(50) DEFAULT NULL,
-  Email VARCHAR(50) DEFAULT NULL,
-  Username VARCHAR(50) DEFAULT NULL,
-  Password VARCHAR(255) DEFAULT NULL,
-  Role VARCHAR(50) DEFAULT NULL,
-  CreatedByID VARCHAR(255) DEFAULT (ID),
-  CreatedDateTime DATETIME DEFAULT NOW(),
-  LastModifiedByID VARCHAR(255) DEFAULT (ID),
-  LastModifiedDateTime DATETIME DEFAULT NOW(),
-  PRIMARY KEY(ID),
-  UNIQUE KEY `Username` (`Username`)
+CREATE TABLE users (
+  id VARCHAR(255) NOT NULL DEFAULT (UUID()),
+  firstName VARCHAR(100) DEFAULT NULL,
+  lastName VARCHAR(100) DEFAULT NULL,
+  phone VARCHAR(50) DEFAULT NULL,
+  email VARCHAR(50) DEFAULT NULL,
+  username VARCHAR(50) DEFAULT NULL,
+  password VARCHAR(255) DEFAULT NULL,
+  role VARCHAR(50) DEFAULT NULL,
+  createdByID VARCHAR(255) DEFAULT (ID),
+  createdDateTime DATETIME DEFAULT NOW(),
+  lastModifiedByID VARCHAR(255) DEFAULT (ID),
+  lastModifiedDateTime DATETIME DEFAULT NOW(),
+  isAdmin INT DEFAULT (1),
+  PRIMARY KEY(id),
+  UNIQUE KEY `username` (`username`)
 );
 
-INSERT INTO Users
-  (FirstName, LastName, Phone, Email, Username, Password, Role)
+INSERT INTO users
+  (firstName, lastName, phone, email, username, password, role)
 VALUES
-  ("Administrator", NULL, NULL, NULL, "admin", "setup", "Administrator");
+  ("Administrator", "", NULL, NULL, "admin", "setup", "Administrator");

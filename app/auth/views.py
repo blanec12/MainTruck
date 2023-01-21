@@ -1,5 +1,6 @@
 from flask import Blueprint, request, render_template, redirect, flash, url_for
-from db.config import mysql
+from db.config import db
+from db.models import Users
 
 auth_blueprint = Blueprint("auth", __name__)
 
@@ -12,11 +13,9 @@ def login_post():
     username = request.form.get("username")
     password = request.form.get("password")
 
-    cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM Users WHERE Username = %s AND Password = %s", (username, password))
-    user_found = cursor.fetchone()
+    user = Users.query.filter_by(username=username).first()
 
-    if user_found: 
+    if user: 
         return redirect(url_for("main.index"))
     else:
         flash("Invalid credentials. Please try again.")
