@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 {% block content%}
 <!-- Primary User List -->
-<div class="container-fluid">
+<div class="container">
   <h1>{{ title }}</h1>
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -16,7 +16,6 @@
   <table id="data" class="table table-striped">
     <thead>
       <tr>
-        <th>Status</th>
         <th>Username</th>
         <th>First Name</th>
         <th>Last Name</th>

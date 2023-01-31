@@ -9,7 +9,7 @@ admin_blueprint = Blueprint("admin", __name__)
 @admin_blueprint.route("/admin")
 def list_users():
     users = Users.query.all()
-    return render_template("users.html", title="Users", user_list=users)
+    return render_template("users copy.html", title="Users", user_list=users)
 
 @admin_blueprint.route("/admin/create-user", methods=["POST"])
 def create_user():
@@ -17,7 +17,7 @@ def create_user():
     last_name = request.form.get("LName")
     username = request.form.get("username")
     password = request.form.get("password")
-    role = "User"
+    role, is_admin = "User", 1
 
     if request.form.get("isAdmin") is not None:
         role = "Administrator"
@@ -39,4 +39,7 @@ def create_user():
     except:
         flash('User could not be created. Please try again.', 'danger')
 
-    return redirect(url_for("admin.list_users"))
+
+    return new_user
+
+    #return redirect(url_for("admin.list_users"))

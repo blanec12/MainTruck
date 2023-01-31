@@ -1,3 +1,9 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-signin {
   position: absolute;
   top: 40%;

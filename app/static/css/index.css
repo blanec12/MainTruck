@@ -5,8 +5,3 @@ html, body {
   box-sizing: border-box;
 }
 
-.form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
