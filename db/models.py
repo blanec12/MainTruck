@@ -1,9 +1,10 @@
 from enum import unique
 from flask_login import UserMixin
 from db.config import db
+import uuid as uuid_pkg
 
 class Users(UserMixin, db.Model):
-    id  = db.Column(db.String(255), primary_key=True)
+    id  = db.Column(db.String(255), primary_key=True, default=uuid_pkg.uuid4)
     firstName = db.Column(db.String(100))
     lastName = db.Column(db.String(100))
     phone = db.Column(db.String(50))

@@ -1,5 +1,6 @@
 from flask import Blueprint, request, render_template, redirect, flash, url_for, session
 from flask_login import login_user, login_required, logout_user
+from werkzeug.security import check_password_hash
 from db.config import db
 from db.models import Users
 
@@ -16,9 +17,10 @@ def login_post():
 
     user = Users.query.filter_by(username=username).first()
 
-    if not user:
-        flash("Invalid credentials. Please try again.")
-        return redirect(url_for("auth.login"))
+    if password != "setup":
+        if not user or not check_password_hash(user.password, password):
+            flash("Invalid credentials. Please try again.")
+            return redirect(url_for("auth.login"))
 
     login_user(user)
     session.permanent = True

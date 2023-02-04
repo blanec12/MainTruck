@@ -7,3 +7,9 @@ main_blueprint = Blueprint("main", __name__)
 @login_required
 def index():
     return render_template("index.html")
+
+
+@main_blueprint.route("/tickets")
+@login_required
+def tickets():
+    return render_template("tickets.html")

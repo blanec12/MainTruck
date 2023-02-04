@@ -10,7 +10,7 @@ admin_blueprint = Blueprint("admin", __name__)
 @login_required
 def list_users():
     users = Users.query.all()
-    return render_template("users2.html", title="Users", user_list=users)
+    return render_template("users.html", title="Users", user_list=users)
 
 @admin_blueprint.route("/admin/create-user", methods=["POST"])
 @login_required
@@ -28,7 +28,7 @@ def create_user():
     user = Users.query.filter_by(username=username).first()
 
     if user: 
-        flash('Username could not be created. Username already exists.', 'danger' )
+        flash('User could not be created. Username already exists.', 'danger' )
         return redirect(url_for('admin.list_users'))
     
 
@@ -41,10 +41,7 @@ def create_user():
     except:
         flash('User could not be created. Please try again.', 'danger')
 
-
-    return new_user
-
-    #return redirect(url_for("admin.list_users"))
+    return redirect(url_for("admin.list_users"))
 
 
 
